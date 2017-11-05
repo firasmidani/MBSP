@@ -4,10 +4,12 @@
 #e-mail firas.midani@duke.edu
 #date 2017-11-5
 
-#SEND_TO_BACK.sh accepts a shell scrips and executes in the background. 
-# This prevents 'hagn-ups' if you log out or exis the instance. 
-# output includes the output and errors re-directed form the terminal into two separate files, 
-# and a .pid file that indicates the time stamp and pid of the submission
+#SEND_TO_BACK.sh accepts a shell script and executes in the background. 
+# This prevents 'hagn-ups' if you log out or exit the instance. 
+# It also redirects the output and errors form the terminal into two separate files, 
+# and creates a .pid file that indicates the time stamp and ProcessID of the submission
+#
+# you can check your running processes with 'ps ux -H' in the terminal
 
 BASHSCRIPT=$1
 TS=$(date +'%Y%m%d-%H%M%S');
