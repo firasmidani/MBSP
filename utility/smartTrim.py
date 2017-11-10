@@ -69,10 +69,8 @@ def MatchPrefix(nmer,Primer):
 	n = len(Primer)
 	Diffs = 0
 	for i in range(0,n):
-		#print i,nmer[i],Primer[i],
 		if not MatchLetter(nmer[i],Primer[i]):
 			Diffs +=1
-		#print Diffs
 	return Diffs
 
 def FindMatch(Seq,Primer):
@@ -80,9 +78,7 @@ def FindMatch(Seq,Primer):
 	n = len(Primer)
 	for i in range(0,L-n):
 		nmer = Seq[i:i+n];
-		#print nmer,'vs',Primer
 		Diffs = MatchPrefix(nmer,Primer);
-		#print Diffs,' mismatches'
 		if Diffs < ndiff:
 			return int(i) # this is location in sequence where primer begins
 		#endif
@@ -90,18 +86,12 @@ def FindMatch(Seq,Primer):
 	return -1
 #enddef
 
-def CutSeq(Seq,i,n):
-	return Seq[i:i+n]							
-#enddef
-
+#main
 handle = open(sys.argv[1],'rU');
 SeqRecords = SeqIO.parse(handle,'fastq');
 for rec in SeqRecords:
 	Seq = str(rec.seq)
 	PrimerIndex = FindMatch(Seq,primer)
-	#print Seq
-	#print PrimerIndex
 	if PrimerIndex != -1:
-		TrimmedSeq = CutSeq(Seq,PrimerIndex,nlength);	
 		SeqIO.write(rec[PrimerIndex:PrimerIndex+nlength],sys.stdout,'fastq')
 #endfor
